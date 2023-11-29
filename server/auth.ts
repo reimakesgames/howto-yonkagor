@@ -48,9 +48,8 @@ auth.get("/callback", (req, res) => {
 
 	getToken(code).then((token) => {
 		const access_token = token.access_token
-		let base64token = btoa(access_token)
 		res.redirect(
-			`https://reimakesgames.github.io/howto-yonkagor/landing.html?access_token=${base64token}`
+			`https://reimakesgames.github.io/howto-yonkagor/landing.html?access_token=${access_token}`
 		)
 	})
 })

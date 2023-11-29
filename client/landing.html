@@ -126,8 +126,6 @@
 							const query = urlParams.get("access_token")
 
 							if (query) {
-								// get discord access token from url
-								const token = atob(query)
 								getUserData(token).then((data) => {
 									document.getElementById(
 										"greeting"
