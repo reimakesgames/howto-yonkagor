@@ -47,9 +47,12 @@ auth.get("/callback", (req, res) => {
 	}
 
 	getToken(code).then((token) => {
-		const access_token = token.access_token
+		console.log(token)
+		getUserData(token.access_token).then((user) => {
+			console.log(`User ${user.username}#${user.discriminator} logged in`)
+		})
 		res.redirect(
-			`https://reimakesgames.github.io/howto-yonkagor/landing.html?access_token=${access_token}`
+			`https://reimakesgames.github.io/howto-yonkagor/landing.html?access_token=${token.access_token}`
 		)
 	})
 })
