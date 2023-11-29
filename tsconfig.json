@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
+		"target": "ES6",
+		"verbatimModuleSyntax": true,
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitAny": false, // has to be false for now
+
+		"moduleResolution": "NodeNext",
+		"module": "NodeNext",
+
+		"lib": ["ES2022"],
+		"outDir": "dist"
+	},
+	"include": ["server/**/*"],
+	"compileOnSave": true
+}
