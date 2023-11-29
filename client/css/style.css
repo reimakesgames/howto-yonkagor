@@ -1,0 +1,183 @@
+:root {
+	--main-color: #ffffff;
+	--green-color: rgb(143, 182, 99);
+	--dark-green-color: rgb(63, 80, 52);
+	--light-green-color: rgb(204, 221, 180);
+	--even-lighter-green-color: rgb(206, 232, 159);
+}
+
+@font-face {
+	font-family: "GothamBold";
+	src: url("../assets/GothamBold.ttf");
+}
+@font-face {
+	font-family: "GothamMedium";
+	src: url("../assets/GothamMedium.ttf");
+}
+@font-face {
+	font-family: "GothamBook";
+	src: url("../assets/GothamBook.ttf");
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+div.top-nav {
+	background-color: var(--green-color);
+
+	width: 100%;
+	height: 64px;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	z-index: 1000;
+}
+div.top-nav::after {
+	background-color: var(--green-color);
+
+	width: 100%;
+	height: 8px;
+
+	position: absolute;
+	top: 72px;
+	content: "";
+}
+
+div.top-nav > div.left-anchor {
+	width: auto;
+	height: 64px;
+	margin-left: 32px;
+
+	float: left;
+}
+
+div.top-nav a.logo {
+	width: 144px;
+	height: 64px;
+
+	float: left;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	text-decoration: none;
+}
+a.logo span {
+	font-size: 40px;
+	font-family: "GothamBold";
+	font-weight: bold;
+	color: var(--main-color);
+	letter-spacing: -0.05em;
+}
+a.logo span::before {
+	color: var(--dark-green-color);
+	content: "How";
+}
+a.logo span::after {
+	color: var(--main-color);
+	content: "To";
+}
+div.top-nav div.search {
+	width: 400px;
+	height: 64px;
+	margin-left: 16px;
+
+	float: left;
+	display: flex;
+	justify-content: start;
+	gap: 16px;
+	align-items: center;
+}
+div.top-nav div.search input[type="text"] {
+	width: 320px;
+	height: 32px;
+
+	border: none;
+	border-bottom: 4px solid var(--main-color);
+	background-color: transparent;
+
+	font-size: 24px;
+	font-family: "Arial";
+	font-weight: normal;
+	color: var(--main-color);
+}
+div.top-nav div.search input[type="text"]:focus {
+	outline: none;
+}
+div.top-nav div.search input[type="text"]::placeholder {
+	color: var(--light-green-color);
+	font-size: 20px;
+}
+div.top-nav div.search input[type="submit"] {
+	width: 128px;
+	height: 64px;
+
+	/* force size */
+	padding: 0;
+	margin: 0;
+
+	border: none;
+	background-color: var(--even-lighter-green-color);
+}
+div.top-nav div.search div.search-button {
+	width: 96px;
+	height: 40px;
+	border-radius: 8px;
+
+	background-color: var(--even-lighter-green-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+div.responsive-container {
+	margin-top: 64px;
+}
+
+div.responsive-container div.content {
+	margin-left: 10%;
+	width: 60%;
+
+	padding-left: 32px;
+	padding-right: 32px;
+
+	position: relative;
+
+	background-color: var(--light-green-color);
+}
+div.responsive-container div.content div.left {
+	background-color: var(--light-green-color);
+
+	width: 8px;
+	height: 100%;
+
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -20px;
+	content: "";
+}
+div.responsive-container div.content div.right {
+	background-color: var(--light-green-color);
+
+	width: 8px;
+	height: 100%;
+
+	display: block;
+	position: absolute;
+	top: 0;
+	right: -20px;
+	content: "";
+}
+div.responsive-container div.content main {
+	padding-top: 32px;
+	padding-bottom: 32px;
+}
