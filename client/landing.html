@@ -126,7 +126,7 @@
 							const query = urlParams.get("access_token")
 
 							if (query) {
-								getUserData(token).then((data) => {
+								getUserData(query).then((data) => {
 									document.getElementById(
 										"greeting"
 									).innerHTML = `Welcome, ${data.username}!`
