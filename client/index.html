@@ -45,6 +45,9 @@
 			type="image"
 			href="https://reimakesgames.github.io/howto-yonkagor/assets/tetra.webp"
 		/>
+
+		<script src="app.js" type="module"></script>
+		<script src="./scrollreveal.js"></script>
 	</head>
 	<body>
 		<div class="top-nav">
@@ -77,13 +80,73 @@
 				<div class="left"></div>
 				<div class="right"></div>
 				<main>
-					<br />
-					<br />
+					<div class="title">
+						<span class="number">🐟</span>
+						<h1 id="greeting">Welcome user!</h1>
+					</div>
+					<p>
+						Soon, this page will be filled with a bunch of cool
+						guides written by none other than Seadrive!<br />
+						For now, you can just log in with Discord and see what
+						people are posting here.
+					</p>
 					<br />
 					<a
 						href="https://discord.com/api/oauth2/authorize?client_id=1179392532040392745&redirect_uri=https%3A%2F%2Fhowtoapi.reicaffie.xyz%2Fauth%2Fcallback&response_type=code&scope=guilds%20identify"
-						>Try the Log-in with Discord functionality!</a
+						id="login"
+						>Log in with Discord</a
 					>
+					<script type="module">
+						import {
+							user,
+							getProfile,
+							login,
+							logout,
+						} from "./app.js"
+
+						ScrollReveal().reveal(".title", {
+							delay: 100,
+							duration: 1000,
+							distance: "50px",
+							origin: "bottom",
+						})
+						ScrollReveal().reveal("p", {
+							delay: 300,
+							duration: 1000,
+							distance: "50px",
+							origin: "right",
+						})
+						ScrollReveal().reveal("img", {
+							delay: 500,
+							duration: 1000,
+							distance: "50px",
+							origin: "right",
+						})
+						ScrollReveal().reveal("#login", {
+							delay: 800,
+							duration: 1000,
+							distance: "50px",
+							origin: "right",
+						})
+
+						login()
+
+						console.log(user)
+
+						const greeting = document.getElementById("greeting")
+						const loginButton = document.getElementById("login")
+
+						if (user) {
+							greeting.innerText = `Welcome, ${user.username}!`
+							loginButton.innerText = "Log out"
+							loginButton.href = "#"
+							// refresh page
+							loginButton.onclick = () => {
+								logout()
+								location.reload()
+							}
+						}
+					</script>
 					<br />
 					<br />
 					<br />
