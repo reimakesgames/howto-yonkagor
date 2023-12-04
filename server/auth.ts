@@ -16,8 +16,8 @@ async function getToken(code: string) {
 	const params = new URLSearchParams()
 	params.set("grant_type", "authorization_code")
 	params.set("code", code)
-	// params.set("redirect_uri", "https://howtoapi.reicaffie.xyz/auth/callback")
-	params.set("redirect_uri", "http://localhost:3000/auth/callback")
+	params.set("redirect_uri", "https://howtoapi.reicaffie.xyz/auth/callback")
+	// params.set("redirect_uri", "http://localhost:3000/auth/callback")
 
 	const authorization = `Basic ${btoa(
 		`${process.env.DISCORD_CLIENT_ID}:${process.env.DISCORD_CLIENT_SECRET}`
@@ -62,7 +62,10 @@ auth.get("/callback", (req, res) => {
 		const session_token = randomUUID()
 
 		getUserData(token.access_token).then((user) => {
-			console.log(`User ${user.username}#${user.discriminator} logged in`)
+			console.log(
+				`User ${user.username}#${user.discriminator} logged in with id ${user.id}`
+			)
+			console.log(`Session token: ${session_token}`)
 
 			query(
 				`
@@ -116,18 +119,18 @@ auth.get("/callback", (req, res) => {
 				[session_token, user.id.toString()]
 			)
 		})
-		// res.redirect(
-		// 	`https://reimakesgames.github.io/howto-yonkagor/landing.html?access_token=${token.access_token}`
-		// )
 		res.cookie("session", session_token, {
-			// domain: "https://howtoapi.reicaffie.xyz",
-			domain: "http://localhost:3000",
+			domain: "https://howtoapi.reicaffie.xyz",
+			// domain: "http://localhost:3000",
 			httpOnly: true,
 			secure: true,
 			sameSite: "strict",
 		})
 		res.redirect(
-			`http://localhost:5500/client/landing.html?session=${session_token}`
+			`https://reimakesgames.github.io/howto-yonkagor/landing.html?session=${session_token}`
 		)
+		// res.redirect(
+		// 	`http://localhost:5500/client/landing.html?session=${session_token}`
+		// )
 	})
 })
