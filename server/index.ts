@@ -55,6 +55,13 @@ app.get("/check", (req, res) => {
 		})
 })
 
+// redirect if any other route is accessed
+app.get("*", (req, res) => {
+	res.redirect(
+		"https://reimakesgames.github.io/howto-yonkagor/error.html?status=404"
+	)
+})
+
 app.listen(port, () => {
 	console.log(`Active at PORT ${port}`)
 })
