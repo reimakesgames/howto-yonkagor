@@ -13,7 +13,7 @@ boot()
 
 app.use(
 	cors({
-		origin: "https://reimakesgames.github.io/", // allow only this origin
+		origin: "https://reimakesgames.github.io", // allow only this origin
 		credentials: true,
 	})
 )
