@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>HowTo</title>
+
+		<link rel="stylesheet" href="css/error.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="error">
+				<h1 id="code">Oops!</h1>
+				<h2 id="description">Something went wrong.</h2>
+				<p id="misc">
+					We're sorry, but we couldn't find the page you were looking
+					for.
+				</p>
+				<br />
+				<br />
+				<a href="https://reimakesgames.github.io/howto-yonkagor"
+					>Return to the homepage</a
+				>
+			</div>
+			<img class="seadrive" src="assets/seadrive.png" alt="" />
+		</div>
+		<div class="background"></div>
+
+		<script>
+			// get the error message from the url
+			const urlParams = new URLSearchParams(window.location.search)
+			const status = urlParams.get("status")
+
+			const messages = {
+				200: "OK",
+				400: "Bad Request",
+				401: "Unauthorized",
+				403: "Forbidden",
+				404: "Not Found",
+				500: "Internal Server Error",
+				502: "Bad Gateway",
+				503: "Service Unavailable",
+				504: "Gateway Timeout",
+			}
+
+			const miscMessages = {
+				200: "Everything's fine and normal",
+				400: "Haha you're bad",
+				401: "You're not allowed to do that",
+				403: "Nope",
+				404: "I forgot that doesn't exist",
+				500: "It's not you, it's us",
+				502: "Can I really not do anything right?",
+				503: "Routine's chewing on the cables again wtf",
+				504: "Huh, nothing's happening",
+			}
+
+			// display the error message
+			document.getElementById("code").innerText = status
+			document.getElementById("description").innerText = messages[status]
+			document.getElementById("misc").innerText = miscMessages[status]
+		</script>
+	</body>
+</html>

@@ -8,6 +8,34 @@ async function getUserData(access_token) {
 	return await response.json()
 }
 
+/**
+ * Sets a cookie
+
+ * @param {string} name The cookie identifier
+ * @param {string} value The value you want added
+ * @param {number?} days Days until the cookie expires
+ */
+function setCookie(name, value, days) {
+	let expires = ""
+	if (days) {
+		let date = new Date()
+		date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+		expires = "; expires=" + date.toUTCString()
+	}
+	document.cookie = name + "=" + (value || "") + expires + "; path=/"
+}
+
+function getCookie(name) {
+	let nameEQ = name + "="
+	let ca = document.cookie.split(";")
+	for (let i = 0; i < ca.length; i++) {
+		let c = ca[i]
+		while (c.charAt(0) == " ") c = c.substring(1, c.length)
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+	}
+	return null
+}
+
 export let user = JSON.parse(localStorage.getItem("user"))
 
 export function getProfile() {
@@ -26,20 +54,27 @@ export function getProfile() {
 	return profileUrl
 }
 
-export function login(forceNewToken) {
-	// if forceNewToken is true, don't use the token from local storage
+export function login() {
+	fetch("https://howtoapi.reicaffie.xyz/check", {
+		method: "GET",
+		credentials: "include",
+		headers: {
+			authorization: `Bearer ${getCookie("session")}`,
+		},
+	}).then(async (response) => {
+		if (response.status === 200) {
+			// token is valid, so we can just use it
+			alert("Your token is valid! spam rei lol")
+		}
+	})
+}
+
+export function saveSessionToken() {
+	// save the ?session= param as a cookie
 	const urlParams = new URLSearchParams(window.location.search)
-	const access_token = forceNewToken
-		? urlParams.get("access_token")
-		: localStorage.getItem("access_token")
-
-	console.log("access_token", access_token)
-
-	if (access_token) {
-		getUserData(access_token).then((data) => {
-			localStorage.setItem("user", JSON.stringify(data))
-			localStorage.setItem("access_token", access_token)
-		})
+	const sessionToken = urlParams.get("session")
+	if (sessionToken) {
+		setCookie("session", sessionToken)
 	}
 }
 
@@ -48,3 +83,5 @@ export function logout() {
 	localStorage.removeItem("access_token")
 	localStorage.removeItem("profile_url")
 }
+
+logout()
