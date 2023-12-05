@@ -56,15 +56,10 @@ export function getProfile() {
 
 export function login() {
 	fetch("https://howtoapi.reicaffie.xyz/auth/check", {
-		// fetch("http://localhost:3000/auth/check", {
 		method: "GET",
 		credentials: "include",
-		// headers: {
-		// 	authorization: `Bearer ${getCookie("session")}`,
-		// },
 	}).then(async (response) => {
 		if (response.status === 200) {
-			// alert("Your token is valid! spam rei lol")
 			if (response.url.includes("401")) {
 				alert(
 					"You don't have credentials, please login first. If this is a mistake, please contact rei."
