@@ -55,16 +55,25 @@ export function getProfile() {
 }
 
 export function login() {
-	fetch("https://howtoapi.reicaffie.xyz/check", {
+	// fetch("https://howtoapi.reicaffie.xyz/auth/check", {
+	fetch("http://localhost:3000/auth/check", {
 		method: "GET",
 		credentials: "include",
-		headers: {
-			authorization: `Bearer ${getCookie("session")}`,
-		},
+		// headers: {
+		// 	authorization: `Bearer ${getCookie("session")}`,
+		// },
 	}).then(async (response) => {
 		if (response.status === 200) {
-			// token is valid, so we can just use it
-			alert("Your token is valid! spam rei lol")
+			// alert("Your token is valid! spam rei lol")
+			if (response.url.includes("401")) {
+				alert(
+					"You don't have credentials, please login first. If this is a mistake, please contact rei."
+				)
+				window.location.href =
+					"https://discord.com/api/oauth2/authorize?client_id=1179392532040392745&redirect_uri=https%3A%2F%2Fhowtoapi.reicaffie.xyz%2Fauth%2Fcallback&response_type=code&scope=guilds%20identify"
+			} else {
+				alert("Your token is valid!")
+			}
 		}
 	})
 }
