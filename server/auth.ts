@@ -88,17 +88,31 @@ function saveUserToDB(user: APIUser, token: RESTPostOAuth2AccessTokenResult) {
 	)
 }
 
-function saveSessionToDB(session: string, user_id: string) {
-	return query(
+async function saveSessionToDB(session: string, user_id: string) {
+	// see if there's an existing session
+	const queryResult = await query(
 		`
-		INSERT INTO sessions (
-			session,
-			user_id
-		) VALUES (
-			$1,
-			$2
-		)
+		SELECT * FROM sessions WHERE user_id = $1
+	`,
+		[user_id]
+	)
+
+	// if there is, update it
+	if (queryResult.rows.length > 0) {
+		await query(
+			`
+			UPDATE sessions SET session = $1 WHERE user_id = $2
 		`,
+			[session, user_id]
+		)
+		return
+	}
+
+	// otherwise, create a new one
+	await query(
+		`
+		INSERT INTO sessions (session, user_id) VALUES ($1, $2)
+	`,
 		[session, user_id]
 	)
 }
