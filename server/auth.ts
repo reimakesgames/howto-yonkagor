@@ -141,7 +141,9 @@ auth.get("/callback", async (req, res) => {
 		sameSite: "none",
 	})
 	res.redirect(
-		`${process.env.CLIENT_URL}${process.env.CLIENT_SUBDIRECTORY}/landing.html?session=${sessionToken}`
+		`${process.env.CLIENT_URL}${
+			process.env.CLIENT_SUBDIRECTORY
+		}/landing.html?session=${btoa(sessionToken)}`
 	)
 	console.warn("Redirected")
 })
