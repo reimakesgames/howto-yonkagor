@@ -55,8 +55,8 @@ export function getProfile() {
 }
 
 export function login() {
-	// fetch("https://howtoapi.reicaffie.xyz/auth/check", {
-	fetch("http://localhost:3000/auth/check", {
+	fetch("https://howtoapi.reicaffie.xyz/auth/check", {
+		// fetch("http://localhost:3000/auth/check", {
 		method: "GET",
 		credentials: "include",
 		// headers: {
